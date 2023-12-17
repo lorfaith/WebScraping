@@ -111,3 +111,16 @@ ratings
 
 next2<-cbind(rank_title,ratings)
 next2
+
+list_year_ep <- scrape(session) %>%
+  html_nodes('span.sc-43986a27-8.jHYIIK.cli-title-metadata-item') %>% 
+  html_text()
+
+Year <- list_year_ep[seq(1, length(list_year_ep), by = 3)][1:50]
+Episode <- list_year_ep[seq(2, length(list_year_ep), by = 3)][1:50]
+
+year_ep<- data.frame(Episode, Year, stringsAsFactors = FALSE)
+print(year_ep)
+
+final<- cbind(next2,year_ep)
+final
